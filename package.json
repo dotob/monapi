@@ -2,9 +2,9 @@
   "name": "monapi",
   "version": "0.0.0",
   "description": "restful api for monlist db",
-  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "coffee server.coffee"
   },
   "author": "jk & sk",
   "license": "BSD-2-Clause",
@@ -13,6 +13,7 @@
     "body-parser": "*",
     "knex": "*",
     "passport": "*",
-    "passport-http": "*"
+    "passport-http": "*",
+    "coffee-script": "~1.8.0"
   }
 }
