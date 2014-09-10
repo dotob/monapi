@@ -1,0 +1,18 @@
+{
+  "name": "monapi",
+  "version": "0.0.0",
+  "description": "restful api for monlist db",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jk & sk",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "knex": "*",
+    "passport": "*",
+    "passport-http": "*"
+  }
+}
