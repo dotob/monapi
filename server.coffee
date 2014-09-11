@@ -10,9 +10,14 @@ app.use bodyParser.json()
 # user auth
 passport.use new BasicStrategy((username, password, done) ->
   console.log "authenticate"
-  return done(null, "user_basti")  if username is "basti" and password is "basti"
-  done null, false,
-    message: "du nicht"
+  new User({ Nummer:123 }).fetch().then((u) -> 
+    console.dir u
+    if u
+      done null, u
+    else
+      done null, false
+  )
+  console.log "authenticate end"
 )
 
 # routes
@@ -27,21 +32,19 @@ app.post "/save", passport.authenticate("basic",
 
 # orm
 knex = require("knex")(
-  client: 'mariasql',
+  client: 'mariasql'
   connection: 
-    host     : '127.0.0.1',
-    user     : 'root',
-    password : 'root',
-    database : 'inform',
-    charset  : 'utf8'
-);
+    host     : 'localhost'
+    user     : 'root'
+    password : 'root'
+    db       : 'inform'
+)
 
 bookshelf = require("bookshelf")(knex);
 
-User = bookshelf.Model.extend({
-    tableName: 'users'
-});
-
+User = bookshelf.Model.extend(
+  tableName: 'personaltable'
+)
 
 # start app
 server = app.listen(3000, ->
