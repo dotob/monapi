@@ -1,4 +1,4 @@
-# config
+# setup
 express = require("express")
 bodyParser = require("body-parser")
 app = express()
@@ -19,17 +19,31 @@ passport.use new BasicStrategy((username, password, done) ->
 app.get "/", (req, res) ->
   res.send "home"
 
-app.get "/login", (req, res) ->
-  res.send "please login"
-
 app.post "/save", passport.authenticate("basic",
   session: false
 ), (req, res) ->
   console.dir req.body
   res.end "thanks for the data"
 
+# orm
+knex = require("knex")(
+  client: 'mariasql',
+  connection: 
+    host     : '127.0.0.1',
+    user     : 'root',
+    password : 'root',
+    database : 'inform',
+    charset  : 'utf8'
+);
+
+bookshelf = require("bookshelf")(knex);
+
+User = bookshelf.Model.extend({
+    tableName: 'users'
+});
+
 
 # start app
 server = app.listen(3000, ->
-  console.log "Listening on port %d", server.address().port
+  console.log "monapi is listening on port %d", server.address().port
 )

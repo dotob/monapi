@@ -7,13 +7,14 @@
     "start": "coffee server.coffee"
   },
   "author": "jk & sk",
-  "license": "BSD-2-Clause",
+  "license": "inform only",
   "dependencies": {
     "express": "*",
     "body-parser": "*",
     "knex": "*",
     "passport": "*",
     "passport-http": "*",
-    "coffee-script": "~1.8.0"
+    "coffee-script": "~1.8.0",
+    "bookshelf": "~0.7.7"
   }
 }
