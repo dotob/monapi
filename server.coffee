@@ -8,17 +8,13 @@ app.use passport.initialize()
 app.use bodyParser.json()
 
 # user auth
-passport.use new BasicStrategy((username, password, done) ->
+passport.use new BasicStrategy (username, password, done) ->
   console.log "authenticate"
-  new User({ Nummer:123 }).fetch().then((u) -> 
-    console.dir u
+  new User({ Nummer:username }).fetch().then (u) -> 
     if u
       done null, u
     else
       done null, false
-  )
-  console.log "authenticate end"
-)
 
 # routes
 app.get "/", (req, res) ->
