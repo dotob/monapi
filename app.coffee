@@ -5,6 +5,7 @@ http = require("http")
 bodyParser = require("body-parser")
 path = require("path")
 db = require("./models")
+winston = require('winston')
 passport = require("passport")
 BasicStrategy = require("passport-http").BasicStrategy
 app = express()
@@ -21,6 +22,18 @@ app.use express.methodOverride()
 app.use passport.initialize()
 app.use app.router
 app.use bodyParser.json()
+
+# logger
+winston.loggers.add('monapi', {
+  console:
+    colorize: 'true'
+    label: 'monapi'
+  ,
+  file:
+    filename: 'monapi.log'
+});
+logger = winston.loggers.get('monapi')
+logger.info "logging works"
 
 # user auth
 passport.use new BasicStrategy (username, password, done) ->
